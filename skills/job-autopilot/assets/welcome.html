@@ -1,0 +1,93 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Autopilot Setup</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root { --navy: #001f3f; --accent: #0074D9; --bg: #f4f7fb; --card: #fff; --text: #14213d; --muted: #5b6b82; --line: #dfe6ef; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #000; --card: #0d1117; --text: #e6edf3; --muted: #8b98a9; --line: #222b36; } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); }
+  a { color: var(--accent); text-decoration: none; }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 40px 16px 48px; }
+  .head { display: flex; gap: 14px; align-items: center; margin-bottom: 28px; }
+  .logo { width: 48px; height: 48px; border-radius: 10px; background: var(--navy); color: #fff; display: grid; place-items: center; font-size: 22px; flex: 0 0 48px; }
+  h1 { font-size: 26px; margin: 0; line-height: 1.2; }
+  .sub { color: var(--muted); margin: 2px 0 0; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 20px 24px; margin-bottom: 16px; }
+  .card h2 { font-size: 18px; margin: 0 0 12px; display: flex; gap: 10px; align-items: center; }
+  .card h2 i { color: var(--accent); }
+  ol { margin: 0; padding-left: 20px; }
+  li { margin: 6px 0; }
+  .sites { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 12px; }
+  .site { display: flex; gap: 10px; align-items: center; padding: 10px 14px; border: 1px solid var(--line); border-radius: 8px; color: var(--text); min-height: 44px; }
+  .site:hover, .site:focus { border-color: var(--accent); }
+  .site i { color: var(--accent); width: 18px; text-align: center; }
+  code { background: rgba(0, 116, 217, .1); padding: 2px 6px; border-radius: 4px; font-size: 14px; overflow-wrap: anywhere; }
+  .note { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+  .contact { display: flex; flex-wrap: wrap; gap: 10px 24px; }
+  .contact a { display: inline-flex; gap: 8px; align-items: center; min-height: 44px; }
+  footer { color: var(--muted); font-size: 14px; text-align: center; margin-top: 28px; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div class="head">
+    <div class="logo"><i class="fa-solid fa-briefcase"></i></div>
+    <div>
+      <h1>Job Autopilot is ready</h1>
+      <p class="sub">This is the browser your AI agent uses to apply for jobs.</p>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2><i class="fa-solid fa-list-check"></i> Next steps</h2>
+    <ol>
+      <li>Optional: sign in below to sites where you already have an account. The agent reuses these logins.</li>
+      <li><strong>Close this window</strong> when you are done. The agent cannot use the browser while it is open here.</li>
+      <li>Restart Claude Code or Codex.</li>
+      <li>Ask: <code>/job-autopilot apply to remote React developer jobs in Europe</code></li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><i class="fa-solid fa-right-to-bracket"></i> Sign in (optional)</h2>
+    <div class="sites">
+      <a class="site" href="https://freehire.me" target="_blank" rel="noopener"><i class="fa-solid fa-magnifying-glass"></i> freehire</a>
+      <a class="site" href="https://www.myworkday.com" target="_blank" rel="noopener"><i class="fa-solid fa-building"></i> Workday</a>
+      <a class="site" href="https://my.greenhouse.io" target="_blank" rel="noopener"><i class="fa-solid fa-seedling"></i> Greenhouse (MyGreenhouse)</a>
+      <a class="site" href="https://accounts.google.com" target="_blank" rel="noopener"><i class="fa-brands fa-google"></i> Google</a>
+    </div>
+    <p class="note">Workday needs an account per company. When a job needs one, the agent pauses and you create it in this browser.</p>
+  </section>
+
+  <section class="card">
+    <h2><i class="fa-solid fa-shield-halved"></i> What the agent will never do</h2>
+    <ol>
+      <li>Invent experience or answers that are not in your profile.</li>
+      <li>Solve CAPTCHAs or get around bot checks. It hands them to you.</li>
+      <li>Automate LinkedIn, Indeed or Glassdoor applies. It lists those jobs for you.</li>
+      <li>Pay fees or send ID documents or bank details.</li>
+    </ol>
+    <p class="note">Your profile and application log stay on this computer in <code>~/.job-autopilot</code>.</p>
+  </section>
+
+  <section class="card">
+    <h2><i class="fa-solid fa-handshake"></i> Let's Work Together</h2>
+    <div class="contact">
+      <a href="https://wa.me/923435347417" target="_blank" rel="noopener"><i class="fa-brands fa-whatsapp"></i> WhatsApp: https://wa.me/923435347417</a>
+      <a href="mailto:Contact@rameezscripts.com"><i class="fa-solid fa-envelope"></i> Email: Contact@rameezscripts.com</a>
+    </div>
+  </section>
+
+  <footer>Built by Rameez Scripts</footer>
+</main>
+</body>
+</html>

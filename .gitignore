@@ -1,0 +1,14 @@
+# Developed by Mohammad Rameez Imdad (Rameez Scripts)
+# WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+# YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+node_modules/
+*.log
+.DS_Store
+Thumbs.db
+# local dev notes
+MEMORY.md
+# personal data never goes in the repo
+profile.md
+applications.jsonl
+applications.csv
+*.pdf

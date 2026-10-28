@@ -1,0 +1,16 @@
+{
+  "name": "job-autopilot",
+  "description": "Tell your agent the job and the place. It searches freehire, shortlists what fits and applies for you in Chromium.",
+  "owner": {
+    "name": "Mohammad Rameez Imdad (Rameez Scripts)",
+    "email": "Contact@rameezscripts.com",
+    "url": "https://rameezscripts.com"
+  },
+  "plugins": [
+    {
+      "name": "job-autopilot",
+      "source": "./",
+      "description": "Find IT jobs with freehire and auto apply in a real Chromium window, using your own profile and resume."
+    }
+  ]
+}
