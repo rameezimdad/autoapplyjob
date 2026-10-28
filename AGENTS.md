@@ -17,7 +17,7 @@ This repository is the skill. Read `skills/job-autopilot/SKILL.md` and follow it
 | Path | Role |
 |---|---|
 | `skills/job-autopilot/SKILL.md` | the skill contract: preflight, profile, search, shortlist, apply loop, report, hard rules |
-| `skills/job-autopilot/references/` | detail loaded on demand: onboarding, per-ATS playbook, screening answers + cover letter rules |
+| `skills/job-autopilot/references/` | detail loaded on demand: onboarding, per-ATS playbook, screening answers + cover letter rules, official-site check + board-to-company lookup |
 | `skills/job-autopilot/templates/profile.example.md` | the profile every user starts from |
 | `skills/job-autopilot/scripts/setup.sh`, `setup.ps1` | install Playwright MCP + Chromium into `~/.job-autopilot`, register the `freehire` and `job-browser` MCP servers in Claude Code and Codex, open Chromium |
 | `skills/job-autopilot/scripts/tracker.mjs` | the application log (`applications.jsonl`), dependency-free |
@@ -30,7 +30,7 @@ This repository is the skill. Read `skills/job-autopilot/SKILL.md` and follow it
 ## Rules for changes
 
 - **SKILL.md is the contract.** Keep it under about 250 lines and move detail into `references/`. Name MCP tools by their bare names (`search_jobs`, `browser_navigate`), because every client prefixes them differently.
-- **Never weaken the hard rules:** truth only, no CAPTCHA or bot-check bypass, no LinkedIn / Indeed / Glassdoor automation, caps, no payments or ID numbers, data only to the employer form.
+- **Never weaken the hard rules:** truth only, no CAPTCHA or bot-check bypass, official sites only (never a job board, aggregator or chat channel), caps, no payments or ID numbers, data only to the employer form.
 - **Pinned versions.** Playwright MCP `0.0.83` is set in both `setup.sh` and `setup.ps1`, so bump them together, and never use `@latest`. The browser path (`node_modules/@playwright/mcp/cli.js` + its own `playwright`) keeps Chromium and the MCP on one Playwright version.
 - **Release version.** It lives in `.claude-plugin/plugin.json`, `.codex-plugin/plugin.json` and the SKILL.md `metadata`. Bump all three together.
 - **Scripts:**

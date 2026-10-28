@@ -3,7 +3,7 @@ name: job-autopilot
 description: Find IT jobs with the freehire job search and apply to them automatically in a real Chromium window, using the user's own profile and resume. Use when the user says "apply to jobs", "auto apply", "find me a job and apply", "apply to remote React jobs in Europe", "job hunt", "job-autopilot", "/job-autopilot", asks to set up the job autopilot, edit their job profile, or wants a report of the applications sent so far.
 license: MIT
 metadata:
-  version: 0.1.0
+  version: 0.2.0
   author: Mohammad Rameez Imdad (Rameez Scripts)
 ---
 <!--
@@ -14,13 +14,13 @@ YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
 
 # Job Autopilot
 
-Search freehire's catalogue of IT job postings, shortlist the ones that fit the user's profile, then fill in and submit each application in a visible Chromium window. Every job handled is logged, so the same posting is never applied to twice.
+Search freehire's catalogue of IT job postings, shortlist the ones that fit the user's profile, then fill in and submit each application in a visible Chromium window, on the company's official website or the hiring system the company itself runs. Every job handled is logged, so the same posting is never applied to twice.
 
 Two MCP servers do the work. Clients prefix tool names differently (`mcp__freehire__search_jobs`, `freehire.search_jobs` …); this file uses the bare names.
 
 | Server | Tools used |
 |---|---|
-| `freehire` | `search_jobs`, `get_job`, `check_jobs_open`, `list_filter_values`, `similar_jobs` |
+| `freehire` | `search_jobs`, `get_job`, `check_jobs_open`, `list_filter_values`, `similar_jobs`, `search_companies` |
 | `job-browser` (Playwright MCP, Chromium, persistent profile) | `browser_navigate`, `browser_snapshot`, `browser_find`, `browser_click`, `browser_type`, `browser_fill_form`, `browser_select_option`, `browser_file_upload`, `browser_wait_for`, `browser_take_screenshot`, `browser_tabs` |
 
 `SKILL_DIR` = the folder holding this file. `APP` = `~/.job-autopilot` (or `$JOB_AUTOPILOT_HOME`).
@@ -41,6 +41,7 @@ Tracker = `node SKILL_DIR/scripts/tracker.mjs <command>` (`check`, `add`, `today
 |---|---|
 | "set up job autopilot", first run | Step 0 (always run setup), Step 1 |
 | "apply to <role> jobs in <place>" | Steps 0 to 6 |
+| "apply to <role> jobs at Stripe, Careem …" | Steps 0 to 6, companies per `references/official-site.md` § 3 |
 | "find <role> jobs" (no apply) | Steps 0, 2, 3, stop after the shortlist |
 | "status", "what did I apply to" | tracker `list --days 30` + `stats`, then the `needs-you` rows with their links |
 | "export" | tracker `csv` |
@@ -78,6 +79,7 @@ Build one `search_jobs` call:
 | skills | `skills` from the ask; profile skills only when the ask names none |
 | `min_salary` | `salary_min` + `salary_currency` |
 | needs sponsorship outside `authorized_countries` | `visa_sponsorship: true` |
+| company names ("at Stripe") | `search_companies` per name, then `company_slugs`. A company freehire doesn't have: official-site.md § 3 |
 | `exclude_companies` | `exclude_company_slugs` |
 | `posted_within_days` | `posted_within_days` (default 14), `limit` 25 |
 
@@ -94,15 +96,17 @@ Build one `search_jobs` call:
 3. Hard gates. Drop jobs where the location or work authorization can't be met (onsite in a country outside `authorized_countries`, with no sponsorship).
 4. Fit score 0-100 from the preview. Title match 30, must-have skill overlap 30, seniority 15, location / work mode 15, salary at or above `min_salary` 10 (salary not stated = 5). Drop below `min_fit` (default 60).
 5. `get_job` on the top 10. Drop a posting when:
-   - it shows signs it is not being filled (its reality class or observed signals say so),
-   - it hard-requires something the profile lacks (a language, a clearance, a degree, years),
+   - `fake_freshness` is true, or `reality` says it is not fresh / not being filled,
+   - a `requirements` item with priority `required` is something the profile lacks (a language, a clearance, a degree, years),
    - it asks the applicant for money.
 
-   Note the ATS it names.
+   Note its `source` (the hiring system) and whether `official_job_url` is official, using `references/official-site.md` § 1.
 6. `tracker company <company_slug>` at or above `per_company_30d` → drop.
 7. Show one table. Source: freehire.
 
-   `# | Title | Company | Location / mode | Posted | ATS | Fit | Employer link | freehire link`
+   `# | Title | Company | Location / mode | Posted | Apply on | Fit | Official link | freehire link`
+
+   Apply on: `official (Ashby)` or `board: <source>, official site looked up first`.
 
 ## Step 4 - Confirm the batch
 
@@ -115,8 +119,11 @@ Build one `search_jobs` call:
 
 Open `SKILL_DIR/references/ats-playbook.md` for the system each job uses. Answer questions with `SKILL_DIR/references/screening-answers.md`.
 
-1. `browser_navigate` to the employer posting (never the freehire page), then `browser_snapshot`. If it is gone or closed, log `skipped` with note "closed" and move to the next job.
-2. Hosted on LinkedIn, Indeed, Glassdoor or another job board's one-click apply, or "email your CV to …": log `needs-you` with the link and the reason. Never automate those.
+1. `browser_navigate` to `official_job_url` (never freehire's own `url`), then `browser_snapshot`. If it is gone or closed, log `skipped` with note "closed" and move to the next job.
+2. Official-site check (`references/official-site.md` § 1) before typing anything, and again after any redirect.
+   - Board, aggregator, LinkedIn, Indeed, Glassdoor, recruiter repost or chat channel: find the same job on the company's own site (§ 2) and apply there. Not found: log `needs-you` with the board link.
+   - Red flag (§ 4): log `skipped`, warn the user.
+   - "Email your CV to …": log `needs-you` with the address.
 3. Click Apply. Where the system parses resumes (Lever, Ashby, Workday, SmartRecruiters), upload first. Click the upload control, `browser_file_upload` with `resume_path`, then check every field it filled.
 4. Fill from `profile.md`:
    - text boxes → `browser_fill_form`
@@ -141,7 +148,7 @@ Open `SKILL_DIR/references/ats-playbook.md` for the system each job uses. Answer
 Log every job, whatever the outcome:
 
 ```
-node SKILL_DIR/scripts/tracker.mjs add --slug <slug> --title "<title>" --company "<company>" --company-slug <company_slug> --url "<employer link>" --ats <ats> --status <applied|skipped|needs-you|failed> --note "<short reason>"
+node SKILL_DIR/scripts/tracker.mjs add --slug <slug> --title "<title>" --company "<company>" --company-slug <company_slug> --url "<official URL applied on>" --ats <source> --status <applied|skipped|needs-you|failed> --note "<short reason>"
 ```
 
 ## Step 6 - Report
@@ -157,7 +164,7 @@ Then the `tracker stats` line. Offer the next search: `similar_jobs` on the best
 
 - **Truth only.** Every answer comes from `profile.md` or from the user in this session. Never invent experience, skills, years, degrees, employers, certifications, work authorization, salary history or references. Rounding a number up counts as inventing.
 - **No bypassing.** Never solve, skip or outsource a CAPTCHA or bot check. Never use fake identities. Never create an account with a password the user did not set.
-- **No job-board automation.** LinkedIn, Indeed, Glassdoor and similar boards ban automated applying and restrict accounts that do it. They get logged as `needs-you`.
+- **Official sites only.** Submit only on the company's own website or the hiring system it runs, checked by host before typing. Boards, aggregators, recruiter reposts and chat channels are leads to the official posting, never the place to apply. LinkedIn, Indeed and Glassdoor also ban automated applying, so never log in to them or use their quick-apply.
 - **Caps.** Respect `daily_cap` (default 15, hard max 50) and `per_company_30d` (default 2). One application per posting, ever.
 - **Money and IDs.** Never pay, never enter card or bank details, never send passport, national ID or tax numbers. Stop and tell the user. A posting that charges the applicant is a scam signal: skip it and say why.
 - **Privacy.** Personal data goes only into the employer form being applied to. Never paste it anywhere else or send it to another service.

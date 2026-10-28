@@ -31,13 +31,17 @@ Agent:  [Chromium opens] Acme / Greenhouse: resume uploaded, 14 fields filled,
 1. **You ask in plain words**: the role, the place, remote or onsite.
 2. **freehire search**: your words become a freehire job search: role names, countries, cities, regions, seniority, skills, salary, visa sponsorship. Postings link to the employer's own career page.
 3. **Smart shortlist**: it drops jobs you already applied to, closed postings and ghost listings, plus jobs your work authorization does not cover. It scores the rest against your profile and shows them in a table.
-4. **Auto apply in Chromium**: for each job it opens the employer's application page (Greenhouse, Lever, Ashby, Workday and more). It uploads your resume, fills the form from your profile, writes a short cover letter when there is a field for one, and submits.
+4. **Auto apply on the official company website**: for each job it opens the company's own careers page, or the hiring system the company runs (Workday, Greenhouse, Lever, Ashby and more). It checks the site is really the company's before typing anything. When a posting only came from a job board, it first finds the same job on the company's own site. Then it uploads your resume, fills the form from your profile, writes a short cover letter when there is a field for one, and submits.
 5. **Log and report**: every job goes into a local log with a confirmation screenshot. Nothing gets applied to twice, and you get a report at the end.
 
 ## Features
 
 - Natural-language job search
 - Live IT jobs from freehire
+- Applies on official company sites
+- Finds the official posting for board jobs
+- Apply at companies you name
+- Fake career site check
 - Visible Chromium browser
 - Review mode and auto mode
 - Resume upload and parsing
@@ -136,6 +140,7 @@ The first time, the agent builds your profile. It either reads your resume and a
 | `/job-autopilot apply to remote React jobs in Europe` | search, shortlist, apply |
 | `/job-autopilot find senior Python jobs in Germany with visa sponsorship` | shortlist only, nothing is submitted |
 | `/job-autopilot apply to DevOps jobs in Dubai, auto mode, max 5` | applies to the top 5 without asking each time |
+| `/job-autopilot apply to backend jobs at Stripe, Careem and Systems Ltd` | finds openings at those companies and applies on their official sites |
 | `/job-autopilot status` | what was applied, and what is waiting on you |
 | `/job-autopilot export` | writes `~/.job-autopilot/applications.csv` |
 | `/job-autopilot edit my profile` | change your answers or settings |
@@ -169,7 +174,8 @@ Your data is never sent anywhere except the employer form you are applying to.
 
 - Invent experience, skills, degrees, years, salary history or work authorization.
 - Solve CAPTCHAs or get around bot checks. It hands them to you.
-- Automate LinkedIn, Indeed, Glassdoor or other job-board quick-apply. Their terms forbid it, so those jobs are listed for you with the link.
+- Apply through LinkedIn, Indeed, Glassdoor or any other job board. It finds the same job on the company's official site instead, and lists it for you when it can't.
+- Type your details into a site that is not the company's own or its hiring system, or that asks for a fee.
 - Pay fees, enter card or bank details, or send passport and ID numbers.
 - Exceed your daily cap, or apply to the same posting twice.
 
@@ -185,7 +191,7 @@ Your data is never sent anywhere except the employer form you are applying to.
 | BambooHR, Recruitee, Teamtailor, Personio, Breezy, JazzHR | full |
 | Workday, iCIMS, Jobvite, Taleo | after you create the account once per company |
 | Other company career pages | best effort |
-| LinkedIn, Indeed, Glassdoor quick-apply | listed for you, not automated |
+| Jobs found on LinkedIn, Indeed, Glassdoor and other boards | applied on the company's official site when the same job is there, otherwise listed for you |
 
 ## Fewer permission prompts
 
@@ -202,6 +208,12 @@ Install Job Autopilot, restart Claude Code and type `/job-autopilot apply to <ro
 
 ### Does it work with OpenAI Codex?
 Yes. The installer registers both MCP servers in Codex and installs the skill to `~/.agents/skills`. Type `$job-autopilot` or ask in plain words.
+
+### Does it apply on the company's official website?
+Yes, always. freehire gives every posting a link to the company's own posting, which is the company's careers site or the hiring system it runs. The agent checks that the site belongs to the company before it types anything. When a job only appeared on a job board, it looks up the same job on the company's own careers site and applies there.
+
+### Can I target specific companies?
+Yes. Ask "apply to backend jobs at Stripe and Shopify". It looks those companies up in freehire. A company that isn't there gets its official careers site searched directly.
 
 ### Which jobs can it find?
 IT and tech roles from the freehire catalogue: developers, DevOps, data, QA, design, product and more, worldwide. It filters by country, city, region, remote work, seniority, skills, salary and visa sponsorship.
@@ -254,6 +266,7 @@ skills/job-autopilot/
   references/onboarding.md     profile interview
   references/ats-playbook.md   Greenhouse, Lever, Ashby, Workday and more
   references/screening-answers.md
+  references/official-site.md  official site check, board-to-company lookup
   templates/profile.example.md
   scripts/setup.sh, setup.ps1  Chromium + MCP setup
   scripts/tracker.mjs          application log

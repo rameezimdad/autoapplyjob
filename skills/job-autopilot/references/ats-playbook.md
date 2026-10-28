@@ -6,7 +6,7 @@ YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
 
 # ATS playbook
 
-Find the system by the ATS `get_job` names, or by the URL. Read "All systems" plus that system's section.
+Find the system by the `source` that `get_job` returns, or by the host of `official_job_url`. Read "All systems" plus that system's section.
 
 ## All systems
 
@@ -89,7 +89,8 @@ Best effort. Log `needs-you` with the link when the page:
 - only accepts applications by email, or
 - has no form within 3 clicks.
 
-## Not automated
+## Job boards
 
-- LinkedIn Easy Apply, Indeed Apply, Glassdoor, ZipRecruiter, Naukri, Bayt, and any other job board's one-click apply. Their terms ban automated applying.
-- Log them as `needs-you` and hand the user the link.
+- Never apply on a job board: LinkedIn Easy Apply, Indeed Apply, Glassdoor, ZipRecruiter, Naukri, Bayt or any other board's quick-apply. Their terms ban automated applying, and the company's own site is the official channel anyway.
+- Find the same job on the company's site with `official-site.md` § 2 and apply there.
+- Not found: log `needs-you` and hand the user the board link.
