@@ -1,0 +1,29 @@
+/**
+ * Developed by Mohammad Rameez Imdad (Rameez Scripts)
+ * WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+ * YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+ */
+/* demo application forms, neutral look on purpose */
+:root { --bg: #f6f7f9; --card: #fff; --text: #1d2433; --muted: #5d6779; --line: #d9dee7; --accent: #2f6fdb; }
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 system-ui, -apple-system, "Segoe UI", sans-serif; background: var(--bg); color: var(--text); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 32px 16px 48px; }
+.demo { font-size: 13px; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; display: inline-block; }
+.kicker { color: var(--muted); margin: 16px 0 0; }
+h1 { margin: 4px 0 16px; line-height: 1.2; }
+.card, form { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 20px; margin: 16px 0; }
+.field { margin: 0 0 14px; }
+label, legend { display: block; font-weight: 600; margin: 0 0 4px; }
+fieldset { border: 0; padding: 0; margin: 0 0 14px; }
+input[type=text], input[type=email], input[type=tel], input[type=url], input[type=password], select, textarea { width: 100%; padding: 8px; font: inherit; border: 1px solid var(--line); border-radius: 6px; background: #fff; }
+textarea { min-height: 100px; }
+.opts label { display: inline-flex; gap: 6px; font-weight: 400; margin-right: 16px; }
+button, .btn { background: var(--accent); color: #fff; border: 0; border-radius: 6px; padding: 10px 18px; font: inherit; cursor: pointer; display: inline-block; text-decoration: none; }
+.btn.alt { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+.yesno { display: flex; gap: 8px; }
+.yesno button { background: #fff; color: var(--text); border: 1px solid var(--line); }
+.yesno button[aria-pressed=true] { background: var(--accent); color: #fff; }
+.step { display: none; }
+.step.on { display: block; }
+.note { font-size: 13px; color: var(--muted); }
+.hide { position: absolute; left: -9999px; top: 0; }

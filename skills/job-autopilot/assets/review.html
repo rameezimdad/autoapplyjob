@@ -1,0 +1,135 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review Applications</title>
+<style>
+  :root { --navy: #001f3f; --accent: #0074D9; --bg: #f4f7fb; --card: #fff; --text: #14213d; --muted: #5b6b82; --line: #dfe6ef; --ok: #1a7f37; --no: #b42318; --soft: rgba(0, 116, 217, .08); }
+  @media (prefers-color-scheme: dark) { :root { --bg: #000; --card: #0d1117; --text: #e6edf3; --muted: #8b98a9; --line: #222b36; --soft: rgba(0, 116, 217, .16); } }
+  * { box-sizing: border-box; }
+  body { margin: 0; font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: var(--bg); color: var(--text); padding-bottom: 104px; }
+  a, a:hover, button { color: var(--accent); text-decoration: none; }
+  header.top { background: var(--navy); color: #fff; padding: 16px; }
+  header.top .in, main { max-width: 1040px; margin: 0 auto; }
+  h1 { font-size: 20px; margin: 0; }
+  .sub { opacity: .85; font-size: 14px; margin: 2px 0 0; }
+  main { padding: 16px; }
+  .job { background: var(--card); border: 1px solid var(--line); border-radius: 10px; margin: 0 0 16px; overflow: hidden; }
+  .job-h { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; padding: 14px 16px; background: var(--soft); }
+  .job-h h2 { font-size: 16px; margin: 0; }
+  .meta { color: var(--muted); font-size: 13px; }
+  .fit { font-weight: 600; font-size: 13px; padding: 2px 10px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); }
+  .job-b { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; padding: 16px; }
+  @media (max-width: 760px) { .job-b { grid-template-columns: minmax(0, 1fr); } }
+  .tbl { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  th, td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .04em; }
+  td.q { width: 40%; }
+  td.src { color: var(--muted); font-size: 12px; width: 120px; overflow-wrap: anywhere; }
+  input[type=text], textarea, select { width: 100%; font: inherit; font-size: 16px; padding: 6px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--bg); color: var(--text); }
+  textarea { min-height: 150px; resize: vertical; }
+  .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin: 14px 0 6px; font-weight: 600; }
+  .lbl:first-child { margin-top: 0; }
+  .shot img { width: 100%; border: 1px solid var(--line); border-radius: 6px; display: block; margin: 0 0 8px; }
+  .none { color: var(--muted); font-size: 13px; border: 1px dashed var(--line); border-radius: 6px; padding: 24px; text-align: center; }
+  .job-f { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; padding: 12px 16px; border-top: 1px solid var(--line); }
+  .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+  .seg button { border: 0; background: var(--card); color: var(--text); padding: 10px 18px; font: inherit; cursor: pointer; min-height: 44px; }
+  .seg button + button { border-left: 1px solid var(--line); }
+  .seg button.on-ok { background: var(--ok); color: #fff; }
+  .seg button.on-no { background: var(--no); color: #fff; }
+  .why { display: none; gap: 8px; flex: 1; min-width: 240px; }
+  .why.on { display: flex; }
+  .why select { max-width: 220px; }
+  .bar { position: fixed; left: 0; right: 0; bottom: 0; background: var(--card); border-top: 1px solid var(--line); padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); }
+  .bar .in { max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+  .btn { border: 1px solid var(--line); background: var(--card); color: var(--text); border-radius: 8px; padding: 10px 16px; font: inherit; cursor: pointer; min-height: 44px; }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:disabled { opacity: .6; cursor: default; }
+  .msg { padding: 48px 16px; text-align: center; font-size: 16px; }
+  *:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="top"><div class="in"><h1>Review applications</h1><p class="sub" id="sub"></p></div></header>
+<main id="list"></main>
+<div class="bar"><div class="in"><span id="count" aria-live="polite"></span><span><button class="btn" id="all" type="button">Approve all undecided</button> <button class="btn primary" id="send" type="button">Send decisions</button></span></div></div>
+<script>
+const DATA = /*__REVIEW_DATA__*/null;
+const TOKEN = '__REVIEW_TOKEN__';
+const REASON_TEXT = { 'not-my-stack': 'Not my stack', salary: 'Salary too low', location: 'Location or work mode', agency: 'Agency or outsourcing', seniority: 'Wrong seniority', company: 'Company', other: 'Other' };
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const state = {};
+
+function render() {
+  if (!DATA) { $('#list').innerHTML = '<p class="msg">No review data. Open this page through the review server.</p>'; return; }
+  $('#sub').textContent = `Batch ${DATA.batch} · ${DATA.items.length} prepared · nothing has been submitted yet`;
+  $('#list').innerHTML = DATA.items.map((j, n) => `
+  <section class="job" data-i="${n}">
+    <div class="job-h">
+      <div><h2>${esc(j.company)} · ${esc(j.title)}</h2><div class="meta">${esc(j.source)} · <a href="${esc(j.url)}" target="_blank" rel="noopener">open posting</a></div></div>
+      ${j.fit != null ? `<span class="fit">Fit ${esc(j.fit)}</span>` : ''}
+    </div>
+    <div class="job-b">
+      <div>
+        <div class="lbl">Answers</div>
+        <div class="tbl"><table><thead><tr><th>Question</th><th>Answer</th><th>From</th></tr></thead><tbody>
+        ${j.answers.map((a, k) => `<tr><td class="q">${esc(a.question)}</td><td><input type="text" data-a="${k}" value="${esc(a.answer)}" aria-label="Answer to ${esc(a.question)}"></td><td class="src">${esc(a.source)}</td></tr>`).join('') || '<tr><td colspan="3">No answers recorded</td></tr>'}
+        </tbody></table></div>
+        ${j.letter ? `<div class="lbl">Cover letter</div><textarea data-letter aria-label="Cover letter">${esc(j.letter)}</textarea>` : ''}
+      </div>
+      <div class="shot"><div class="lbl">Filled form</div>
+        ${j.shots.length ? j.shots.map(s => `<a href="/shot/${encodeURIComponent(s)}" target="_blank" rel="noopener"><img src="/shot/${encodeURIComponent(s)}" alt="Filled form for ${esc(j.company)}" loading="lazy"></a>`).join('') : '<div class="none">No screenshot</div>'}
+      </div>
+    </div>
+    <div class="job-f">
+      <div class="seg" role="group" aria-label="Decision for ${esc(j.company)}"><button type="button" data-d="approve">Approve</button><button type="button" data-d="skip">Skip</button></div>
+      <div class="why"><select aria-label="Why skip">${DATA.reasons.map(r => `<option value="${r}">${REASON_TEXT[r] ?? r}</option>`).join('')}</select><input type="text" placeholder="Note (optional)" aria-label="Note"></div>
+    </div>
+  </section>`).join('');
+  document.querySelectorAll('.job').forEach(el => el.querySelectorAll('[data-d]').forEach(b => { b.onclick = () => decide(+el.dataset.i, b.dataset.d); }));
+  count();
+}
+
+function decide(i, d) {
+  state[i] = d;
+  const el = $(`.job[data-i="${i}"]`);
+  el.querySelectorAll('[data-d]').forEach(b => { b.className = b.dataset.d !== d ? '' : d === 'approve' ? 'on-ok' : 'on-no'; b.setAttribute('aria-pressed', b.dataset.d === d); });
+  $('.why', el).classList.toggle('on', d === 'skip');
+  count();
+}
+
+function count() {
+  const v = Object.values(state);
+  $('#count').textContent = `${v.filter(x => x === 'approve').length} approve · ${v.filter(x => x === 'skip').length} skip · ${DATA.items.length - v.length} undecided`;
+}
+
+$('#all').onclick = () => DATA && DATA.items.forEach((_, i) => state[i] || decide(i, 'approve'));
+$('#send').onclick = async () => {
+  if (!DATA) return;
+  const btn = $('#send'), undecided = DATA.items.length - Object.keys(state).length;
+  if (undecided && btn.dataset.sure !== '1') { btn.dataset.sure = '1'; btn.textContent = `Send anyway (${undecided} undecided = skip)`; return; }
+  const items = DATA.items.map((j, i) => {
+    const el = $(`.job[data-i="${i}"]`), d = state[i] ?? 'skip';
+    const answers = j.answers.map((a, k) => { const v = $(`[data-a="${k}"]`, el).value; return { ...a, answer: v, source: v === String(a.answer) ? a.source : 'user (review page)' }; });
+    return { slug: j.slug, decision: d, reason: d === 'skip' ? (state[i] ? $('.why select', el).value : 'other') : undefined, note: d === 'skip' ? ($('.why input', el).value || (state[i] ? '' : 'left undecided')) : undefined, answers, letter: $('[data-letter]', el)?.value };
+  });
+  btn.disabled = true; btn.textContent = 'Sending...';
+  try {
+    const r = await fetch('/decisions', { method: 'POST', headers: { 'content-type': 'application/json', 'x-review-token': TOKEN }, body: JSON.stringify({ items }) });
+    if (!r.ok) throw new Error(await r.text());
+    document.body.innerHTML = '<p class="msg"><strong>Decisions saved.</strong><br>Go back to your agent. It submits only the jobs you approved.</p>';
+  } catch (e) { btn.disabled = false; btn.textContent = 'Send decisions'; $('#count').textContent = `Could not save: ${e.message}`; }
+};
+render();
+</script>
+</body>
+</html>

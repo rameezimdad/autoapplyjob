@@ -1,0 +1,82 @@
+# Developed by Mohammad Rameez Imdad (Rameez Scripts)
+# WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+# YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+#
+# demo profile for tests. __TMP__ and __PORT__ are replaced by the test runner. Generic demo data only.
+identity:
+  first_name: Demo
+  last_name: User
+  email: demo1@demo.com
+  phone: "+92 300 1000001"
+  city: Lahore
+  country: PK
+  linkedin: https://www.linkedin.com/in/demo-user-1
+  github: https://github.com/demo-user-1
+  portfolio: https://demo-user-1.demo.com
+
+documents:
+  resume_path: __TMP__/Demo-User-Resume.pdf
+  master_resume_path: __TMP__/master-resume.md
+  tailor_resume: false
+  cover_letter: auto
+
+eligibility:
+  authorized_countries: [PK]
+  needs_visa_sponsorship: true
+  willing_to_relocate: false
+  notice_period: 1 month
+  background_check_ok: true
+  talent_pool_ok: false
+
+targets:
+  roles: [Frontend Developer, React Developer]
+  seniority: [middle, senior]
+  work_mode: [remote, hybrid]
+  where: { countries: [PK], regions: [global], cities: [Lahore] }
+  skills: { react: 5, typescript: 4, javascript: 6, node: 3, css: 6, graphql: 2 }
+  min_salary: { amount: 2500, currency: USD, period: month }
+  exclude_companies: []
+
+experience:
+  years_total: 6
+  current_title: Senior Frontend Developer
+  current_company: Demo Systems
+  highlights:
+    - Rebuilt the order dashboard in React and TypeScript, cutting page load from 4.1 s to 1.3 s.
+    - Led a team of 3 developers and set up code review and CI with GitHub Actions.
+    - Built 12 internal tools in React used by 300 staff.
+  education: ["BS Computer Science, Demo University, 2020"]
+  languages:
+    - { name: English, level: C1 }
+    - { name: Urdu, level: native }
+
+answers:
+  salary_expectation: 3000 USD per month, negotiable
+  current_salary:
+  why_looking: Looking for a product team with a strong frontend culture.
+  ai_assistance_disclosure: "Yes. I used an AI assistant to fill in this form. All information comes from me."
+  saved:
+    - { q: Are you open to working with a team in the UTC+1 time zone?, a: "Yes" }
+    - { q: What would you build first in your first month?, a: "Learn the product and the codebase, then ship one small improvement users asked for." }
+
+voluntary:
+  gender: Decline to self-identify
+  race_ethnicity: Decline to self-identify
+  veteran: Decline to self-identify
+  disability: Decline to self-identify
+
+preferences: { avoid: [], notes: [] }
+inbox: { enabled: false }
+saved_searches:
+  - { name: react-remote, ask: remote React developer jobs in Europe }
+
+settings:
+  mode: dry-run
+  daily_cap: 15
+  per_company_30d: 2
+  posted_within_days: 14
+  min_fit: 60
+  delay_seconds: 30
+  applier_model: sonnet
+  paper: A4
+  trusted_hosts: ["127.0.0.1:__PORT__"]

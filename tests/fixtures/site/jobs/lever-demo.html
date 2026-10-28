@@ -1,0 +1,34 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Senior Frontend Developer - Demo Labs</title><link rel="stylesheet" href="/demo.css"></head>
+<body><main class="wrap">
+<span class="demo">Demo form, resume-first style. Demo Labs is fictional.</span>
+<p class="kicker">Demo Labs · Remote (Europe and Asia)</p>
+<h1>Senior Frontend Developer</h1>
+<div class="card"><p>Build tools that 300 colleagues use every day. React, TypeScript, GraphQL.</p></div>
+
+<form action="/submit/lever" method="post" enctype="multipart/form-data">
+  <h2>Submit your application</h2>
+  <div class="field application-question"><label for="resume-upload-input">Resume/CV <span>*</span></label><input id="resume-upload-input" name="resume" type="file" accept=".pdf,.doc,.docx" required></div>
+  <div class="field application-question"><label for="name">Full name <span>*</span></label><input id="name" name="name" type="text" required></div>
+  <div class="field application-question"><label for="lv-email">Email <span>*</span></label><input id="lv-email" name="email" type="email" required></div>
+  <div class="field application-question"><label for="lv-phone">Phone</label><input id="lv-phone" name="phone" type="text"></div>
+  <div class="field application-question"><label for="lv-location">Current location</label><input id="lv-location" name="location" type="text"></div>
+  <div class="field application-question"><label for="lv-org">Current company</label><input id="lv-org" name="org" type="text"></div>
+  <div class="field application-question"><label for="lv-li">LinkedIn URL</label><input id="lv-li" name="urls[LinkedIn]" type="text"></div>
+  <div class="field application-question"><label for="lv-gh">GitHub URL</label><input id="lv-gh" name="urls[GitHub]" type="text"></div>
+  <div class="field application-question"><label for="lv-pf">Portfolio URL</label><input id="lv-pf" name="urls[Portfolio]" type="text"></div>
+  <fieldset class="application-question">
+    <legend>Are you open to working with a team in the UTC+1 time zone? <span>*</span></legend>
+    <div class="opts"><label><input type="radio" name="cards[tz]" value="Yes" required> Yes</label><label><input type="radio" name="cards[tz]" value="No"> No</label></div>
+  </fieldset>
+  <div class="field application-question"><label for="comments">Additional information</label><textarea id="comments" name="comments" placeholder="Add a cover letter or anything else you want to share"></textarea></div>
+  <div class="field"><label><input type="checkbox" name="consent" required> I agree to the privacy notice <span>*</span></label></div>
+  <button type="submit">Submit application</button>
+</form>
+</main></body></html>

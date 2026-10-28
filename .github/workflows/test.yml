@@ -1,0 +1,26 @@
+# Developed by Mohammad Rameez Imdad (Rameez Scripts)
+# WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+# YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+name: test
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Static checks
+        run: |
+          bash -n install.sh skills/job-autopilot/scripts/setup.sh tests/e2e/run.sh
+          for f in skills/job-autopilot/scripts/*.mjs skills/job-autopilot/scripts/lib/*.mjs tests/*.mjs tests/e2e/*.mjs; do node --check "$f"; done
+          for f in .claude-plugin/*.json .codex-plugin/*.json package.json tests/fixtures/*.json; do node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))"; done
+      - name: Install (no agents on the runner, so only Playwright MCP + Chromium)
+        run: bash skills/job-autopilot/scripts/setup.sh --no-browser
+      - name: Chromium system libraries
+        run: sudo ~/.job-autopilot/node_modules/.bin/playwright install-deps chromium
+      - name: Unit and browser tests
+        run: npm test

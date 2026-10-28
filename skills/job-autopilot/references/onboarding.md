@@ -4,20 +4,20 @@ WhatsApp: https://wa.me/923435347417 (For Custom Projects)
 YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
 -->
 
-# Onboarding - build APP/profile.md
+# Onboarding - build APP/profile.yaml
 
-The profile is the only source the agent may answer application questions from, so it has to be right. Keep the interview short.
+The profile is the only source the agent may answer application questions from, so it has to be right. Setup copied the template to `APP/profile.yaml`. Fill it in and keep its comments.
 
 ## Fast path: from the resume
 
 1. Ask: "Send me the full path to your resume PDF. I'll pre-fill your profile from it and you correct anything wrong."
-2. Read it (the agent's PDF reader, or `pdftotext <file> -` when available).
-3. Pre-fill Identity, Experience facts, skills and education. Leave everything the resume doesn't state empty. Never guess work authorization, salary, notice period or sponsorship from a resume.
-4. Show the pre-filled sections, then ask Rounds 2 and 3 below for what's still missing.
+2. Read it with your PDF reader, or `pdftotext <file> -` when available.
+3. Pre-fill `identity`, `experience`, `targets.skills` (with years) and education. Leave everything the resume doesn't state empty. Never guess work authorization, sponsorship, salary or notice period from a resume.
+4. Show the pre-filled sections, then ask Rounds 2 and 3 for what is still missing.
 
 ## Manual path: three rounds
 
-Ask each round as one numbered message. Wait for the answers before the next round. Skipped optional questions stay empty.
+Ask each round as one numbered message, and wait for the answers. Optional questions the user skips stay empty.
 
 **Round 1 - you and your documents**
 1. Full name
@@ -27,26 +27,35 @@ Ask each round as one numbered message. Wait for the answers before the next rou
 5. Full path to your resume PDF
 
 **Round 2 - where you can work and what you want**
-1. Countries you can work in without visa sponsorship
+1. Countries where you can work without visa sponsorship
 2. Do you need sponsorship for other countries? Willing to relocate?
-3. Notice period, or the earliest start date
+3. Notice period, or your earliest start date
 4. Target roles (2-3 names), seniority, and remote / hybrid / onsite
 5. Where: countries, regions or cities (or "remote worldwide")
-6. Top skills with years for each, e.g. `react:4, node:2`
-7. Minimum salary and currency (optional), and companies to avoid (optional)
+6. Top skills with years each, e.g. `react: 4, node: 2`
+7. Minimum salary and currency (optional); companies to avoid (optional)
 
 **Round 3 - facts and settings**
-1. Total years of experience, current or last title and company
-2. Two to four highlights you can stand behind in an interview, with numbers when you have them
-3. Education and languages (with level)
-4. What to write in a salary box (e.g. "3000 USD/month, negotiable")
-5. Cover letters: write them for you (`auto`) or never (`none`)?
-6. Voluntary questions (gender, race, veteran, disability): the default is "Decline to self-identify". Change any?
-7. Mode: `review` (you approve every submit, the default) or `auto`. Daily cap (default 15)?
+1. Total years of experience; current or last title and company
+2. Two to four highlights you can defend in an interview, with numbers when you have them
+3. Education, and languages with their level
+4. What to write in a salary box (e.g. "3000 USD per month, negotiable")
+5. Cover letters written for you (`auto`) or never (`none`)?
+6. Tailored resumes per job (only reordering your own lines)? If yes, offer to build the master resume (below).
+7. Voluntary questions (gender, race, veteran, disability) default to "Decline to self-identify". Change any?
+8. Mode: `review` (you approve before anything is sent, the default), `auto`, or `dry-run`. Daily cap (default 15)?
 
-## Write the file
+## Master resume (only when tailoring is on)
 
-- Start from `SKILL_DIR/templates/profile.example.md` (setup already copied it to `APP/profile.md`).
-- Replace each `<fill>` with the user's answer and keep the comments.
-- `ls` the `resume_path`. Missing → ask again.
-- Show the final file. Save once the user says it's right, then go back to the user's original ask.
+1. Start from `SKILL_DIR/templates/master-resume.example.md`, using the user's real resume content only:
+   - one fact per bullet
+   - a few summary variants
+   - every skill
+2. Save it as `APP/master-resume.md`, show it, and change it until the user says it's right.
+3. Set `documents.master_resume_path` to that file and `documents.tailor_resume: true`.
+
+## Finish
+
+1. Use `true` / `false` for yes-no values, and 2-letter codes for countries.
+2. Run `JA profile check`. Fix every error with the user. Read the warnings out.
+3. Show the final file, then go back to the user's original ask.

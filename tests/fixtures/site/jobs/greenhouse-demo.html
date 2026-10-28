@@ -1,0 +1,43 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Frontend Engineer at Demo Company</title><link rel="stylesheet" href="/demo.css"></head>
+<body><main class="wrap">
+<span class="demo">Demo form, single-page style. Demo Company is fictional.</span>
+<p class="kicker">Demo Company · Lahore, Pakistan or remote</p>
+<h1>Frontend Engineer</h1>
+<div class="card">
+  <p>Demo Company builds dashboards for logistics teams. You will own our React front end.</p>
+  <h2>Requirements</h2>
+  <ul><li>3+ years of React and TypeScript</li><li>Experience with REST APIs</li><li>English at C1 level</li></ul>
+</div>
+
+<form id="application_form" action="/submit/greenhouse" method="post" enctype="multipart/form-data">
+  <h2>Apply for this job</h2>
+  <div class="field"><label for="first_name">First Name <span>*</span></label><input id="first_name" name="job_application[first_name]" type="text" autocomplete="given-name" required></div>
+  <div class="field"><label for="last_name">Last Name <span>*</span></label><input id="last_name" name="job_application[last_name]" type="text" autocomplete="family-name" required></div>
+  <div class="field"><label for="email">Email <span>*</span></label><input id="email" name="job_application[email]" type="email" required></div>
+  <div class="field"><label for="phone">Phone</label><input id="phone" name="job_application[phone]" type="tel"></div>
+  <div class="field"><label for="resume">Resume/CV <span>*</span></label><input id="resume" name="job_application[resume]" type="file" accept=".pdf,.doc,.docx,.txt,.rtf" required></div>
+  <div class="field"><label for="cover_letter">Cover Letter</label><input id="cover_letter" name="job_application[cover_letter]" type="file" accept=".pdf,.doc,.docx,.txt,.rtf"></div>
+  <div class="field"><label for="job_application_location">Location (City) <span>*</span></label><input id="job_application_location" name="job_application[location]" type="text" required></div>
+  <div class="field"><label for="question_1001">LinkedIn Profile</label><input id="question_1001" name="job_application[answers_attributes][0][text_value]" type="text"></div>
+  <div class="field"><label for="question_1002">Website</label><input id="question_1002" name="job_application[answers_attributes][1][text_value]" type="text"></div>
+  <div class="field"><label for="question_1003">Are you legally authorized to work in Pakistan? <span>*</span></label>
+    <select id="question_1003" name="job_application[answers_attributes][2][boolean_value]" required><option value="">Please select</option><option value="1">Yes</option><option value="0">No</option></select></div>
+  <div class="field"><label for="question_1004">Will you now or in the future require visa sponsorship? <span>*</span></label>
+    <select id="question_1004" name="job_application[answers_attributes][3][boolean_value]" required><option value="">Please select</option><option value="1">Yes</option><option value="0">No</option></select></div>
+  <div class="field"><label for="question_1005">How many years of professional React experience do you have? <span>*</span></label><input id="question_1005" name="job_application[answers_attributes][4][text_value]" type="text" required></div>
+  <div class="field"><label for="question_1006">Did you use an AI tool to help complete this application?</label>
+    <select id="question_1006" name="job_application[answers_attributes][5][text_value]"><option value="">Please select</option><option>Yes</option><option>No</option></select></div>
+  <fieldset>
+    <legend>Voluntary Self-Identification</legend>
+    <div class="field"><label for="gender">Gender</label><select id="gender" name="job_application[gender]"><option value="">Please select</option><option>Male</option><option>Female</option><option>Decline to self-identify</option></select></div>
+  </fieldset>
+  <button type="submit">Submit Application</button>
+</form>
+</main></body></html>

@@ -1,6 +1,6 @@
 {
   "name": "job-autopilot",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Find IT jobs with freehire and auto apply in a real Chromium window, using your own profile and resume.",
   "author": {
     "name": "Mohammad Rameez Imdad (Rameez Scripts)",

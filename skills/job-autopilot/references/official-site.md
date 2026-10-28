@@ -20,6 +20,7 @@ freehire gives every posting a `source` (where it was found) and an `official_jo
 Check the host of the page you are about to type into. Check it again after every redirect.
 
 **Official** when the host is one of these:
+- a host listed in `settings.trusted_hosts`: the user's own test server, for example. A trusted host still goes through the red-flag check in § 4.
 - the company's own domain or a subdomain of it: `careers.acme.com`, `acme.com/jobs`, `jobs.acme.io`
 - a hiring system, with the company in the subdomain or the path:
 

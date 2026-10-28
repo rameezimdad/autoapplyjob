@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Product Engineer - Demo Cloud</title><link rel="stylesheet" href="/demo.css"></head>
+<body><main class="wrap">
+<span class="demo">Demo form, yes / no button style. Demo Cloud is fictional.</span>
+<p class="kicker">Demo Cloud · Remote</p>
+<h1>Product Engineer</h1>
+<div class="card"><p>Ship features end to end with React and Node.js.</p></div>
+
+<form action="/submit/ashby" method="post" enctype="multipart/form-data" id="ashby">
+  <div class="field"><label for="_systemfield_name">Name <span>*</span></label><input id="_systemfield_name" name="_systemfield_name" type="text" required></div>
+  <div class="field"><label for="_systemfield_email">Email <span>*</span></label><input id="_systemfield_email" name="_systemfield_email" type="email" required></div>
+  <div class="field"><label for="_systemfield_phone">Phone</label><input id="_systemfield_phone" name="_systemfield_phone" type="tel"></div>
+  <div class="field"><label for="_systemfield_location">Location</label><input id="_systemfield_location" name="_systemfield_location" type="text"></div>
+  <div class="field"><label for="_systemfield_resume">Resume <span>*</span></label><input id="_systemfield_resume" name="_systemfield_resume" type="file" accept=".pdf" required></div>
+  <div class="field">
+    <label>Are you authorized to work in the country where this job is located? <span>*</span></label>
+    <div class="yesno" data-q="auth"><button type="button" aria-pressed="false">Yes</button><button type="button" aria-pressed="false">No</button></div>
+    <input type="hidden" name="auth" id="auth">
+  </div>
+  <div class="field"><label for="q-why">What would you build first in your first month? <span>*</span></label><textarea id="q-why" name="why" required></textarea></div>
+  <button type="submit">Submit Application</button>
+</form>
+<script>
+  document.querySelectorAll('.yesno').forEach(g => g.querySelectorAll('button').forEach(b => b.onclick = () => {
+    g.querySelectorAll('button').forEach(x => x.setAttribute('aria-pressed', x === b));
+    document.getElementById(g.dataset.q).value = b.textContent;
+  }));
+</script>
+</main></body></html>

@@ -10,9 +10,10 @@ Find the system by the `source` that `get_job` returns, or by the host of `offic
 
 ## All systems
 
-- `browser_snapshot` before each action. Element refs change after every page update.
-- Fill one section, snapshot, look for red error text, then go to the next section.
-- Long page: `browser_find` with the field label is cheaper than a full snapshot.
+- **Fast fill first.** `JA recipe` piped into `browser_evaluate` fills name, email, phone, location, LinkedIn, GitHub, website, current company and country in one call. It returns every field still open (`remaining`) with its label, type, options and a CSS selector (`sel`). That list replaces most snapshots.
+- **Refs.** Responses carry no snapshot. `browser_find` with the field label returns fresh refs cheaply. Refs change after every page update, so find again after each step.
+- Fill one section, run `JA recipe --outline` (or `browser_find` "error"), fix red error text, then go to the next section.
+- **Iframes.** Embedded forms (e.g. Greenhouse with `gh_jid=` on a company site) can't be reached from the main page. Navigate to the iframe's `src`, then run the official-site check on that host.
 - **File upload:** click the upload control first so the file chooser opens, then `browser_file_upload` with the absolute path. If the page shows "uploading", `browser_wait_for` the file name.
 - **Custom dropdowns (not a real `<select>`):** click, type the first letters, click the option.
 - **Phone with a country picker:** pick the country, then type the number without the country code.

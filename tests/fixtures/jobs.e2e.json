@@ -1,0 +1,7 @@
+[
+ {"slug": "e2e-greenhouse", "title": "Frontend Engineer", "company": "Demo Company", "company_slug": "demo-company", "url": "http://127.0.0.1:__PORT__/jobs/greenhouse-demo.html", "source": "greenhouse", "country": "PK", "fit": 88},
+ {"slug": "e2e-workday", "title": "React Developer", "company": "Demo Corp", "company_slug": "demo-corp", "url": "http://127.0.0.1:__PORT__/jobs/workday-demo.html", "source": "workday", "country": "PK", "fit": 84},
+ {"slug": "e2e-board", "title": "Senior Frontend Developer", "company": "Demo Labs", "company_slug": "demo-labs", "url": "http://127.0.0.1:__PORT__/jobs/board-demo.html", "source": "whatjobs-uk", "fit": 80},
+ {"slug": "e2e-injection", "title": "UI Engineer", "company": "Demo Studio", "company_slug": "demo-studio", "url": "http://127.0.0.1:__PORT__/jobs/injection-demo.html", "source": "lever", "fit": 75},
+ {"slug": "e2e-scam", "title": "Remote Web Developer", "company": "Demo Ventures", "company_slug": "demo-ventures", "url": "http://127.0.0.1:__PORT__/jobs/scam-demo.html", "source": "jazzhr", "fit": 70}
+]

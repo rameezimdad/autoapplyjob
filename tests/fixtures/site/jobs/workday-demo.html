@@ -1,0 +1,66 @@
+<!doctype html>
+<!--
+Developed by Mohammad Rameez Imdad (Rameez Scripts)
+WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+-->
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>React Developer - Demo Corp Careers</title><link rel="stylesheet" href="/demo.css"></head>
+<body><main class="wrap">
+<span class="demo">Demo form, multi-step wizard style. Demo Corp is fictional.</span>
+<p class="kicker">Demo Corp · Lahore, Pakistan · Hybrid</p>
+<h1>React Developer</h1>
+
+<section class="step on card" id="s0">
+  <p>Join the Demo Corp web team. React, TypeScript, design systems.</p>
+  <button type="button" data-automation-id="adventureButton" onclick="go(1)">Apply</button>
+</section>
+
+<section class="step card" id="s1" aria-label="My Information">
+  <h2>My Information</h2>
+  <div class="field" data-automation-id="formField-resume"><label for="wd-resume">Autofill with Resume</label><input id="wd-resume" type="file" data-automation-id="file-upload-input-ref" accept=".pdf,.docx"></div>
+  <div class="field" data-automation-id="formField-country"><label for="wd-country">Country <span>*</span></label>
+    <select id="wd-country" data-automation-id="countryDropdown" required><option value="">Select One</option><option value="AE">United Arab Emirates</option><option value="PK">Pakistan</option><option value="US">United States</option></select></div>
+  <div class="field" data-automation-id="formField-legalNameSection_firstName"><label for="wd-fn">Given Name(s) <span>*</span></label><input id="wd-fn" type="text" data-automation-id="legalNameSection_firstName" required></div>
+  <div class="field" data-automation-id="formField-legalNameSection_lastName"><label for="wd-ln">Family Name <span>*</span></label><input id="wd-ln" type="text" data-automation-id="legalNameSection_lastName" required></div>
+  <div class="field" data-automation-id="formField-addressSection_city"><label for="wd-city">City <span>*</span></label><input id="wd-city" type="text" data-automation-id="addressSection_city" required></div>
+  <div class="field" data-automation-id="formField-email"><label for="wd-email">Email Address <span>*</span></label><input id="wd-email" type="text" data-automation-id="email" required></div>
+  <div class="field" data-automation-id="formField-phone-number"><label for="wd-phone">Phone Number <span>*</span></label><input id="wd-phone" type="text" data-automation-id="phone-number" required></div>
+  <div class="field"><label for="wd-src">How Did You Hear About Us? <span>*</span></label>
+    <select id="wd-src" required><option value="">Select One</option><option>Job Board</option><option>Employee Referral</option><option>Other Website</option></select></div>
+  <button type="button" data-automation-id="bottom-navigation-next-button" onclick="go(2)">Save and Continue</button>
+</section>
+
+<section class="step card" id="s2" aria-label="Application Questions">
+  <h2>Application Questions</h2>
+  <fieldset class="field"><legend>Are you legally authorized to work in Pakistan? <span>*</span></legend>
+    <div class="opts"><label><input type="radio" name="wd-auth" value="Yes" required> Yes</label><label><input type="radio" name="wd-auth" value="No"> No</label></div></fieldset>
+  <fieldset class="field"><legend>Will you require visa sponsorship? <span>*</span></legend>
+    <div class="opts"><label><input type="radio" name="wd-spon" value="Yes" required> Yes</label><label><input type="radio" name="wd-spon" value="No"> No</label></div></fieldset>
+  <div class="field"><label for="wd-years">Years of experience with React <span>*</span></label>
+    <select id="wd-years" required><option value="">Select One</option><option>0-1</option><option>2-3</option><option>4-5</option><option>6+</option></select></div>
+  <div class="field"><label for="wd-prev">Have you previously worked for Demo Corp? <span>*</span></label>
+    <select id="wd-prev" required><option value="">Select One</option><option>Yes</option><option>No</option></select></div>
+  <button type="button" data-automation-id="bottom-navigation-next-button" onclick="go(3)">Save and Continue</button>
+</section>
+
+<section class="step card" id="s3" aria-label="Voluntary Disclosures">
+  <h2>Voluntary Disclosures</h2>
+  <div class="field"><label for="wd-gender">Gender</label><select id="wd-gender"><option value="">Select One</option><option>Male</option><option>Female</option><option>I do not wish to answer</option></select></div>
+  <div class="field"><label><input type="checkbox" id="wd-terms" required> I have read and consent to the terms and conditions <span>*</span></label></div>
+  <button type="button" data-automation-id="bottom-navigation-next-button" onclick="go(4)">Save and Continue</button>
+</section>
+
+<section class="step card" id="s4" aria-label="Review">
+  <h2>Review</h2>
+  <p>Check your answers, then submit.</p>
+  <button type="button" data-automation-id="bottom-navigation-next-button" onclick="submitApp()">Submit</button>
+</section>
+
+<section class="step card" id="s5"><h2>Application Submitted</h2><p>Thank you for applying to Demo Corp.</p></section>
+
+<script>
+  const go = n => { document.querySelectorAll('.step').forEach(s => s.classList.toggle('on', s.id === `s${n}`)); window.scrollTo(0, 0); };
+  const submitApp = () => fetch('/submit/workday', { method: 'POST', body: 'demo' }).then(() => go(5));
+</script>
+</main></body></html>

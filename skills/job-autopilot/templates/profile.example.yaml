@@ -1,0 +1,90 @@
+# Developed by Mohammad Rameez Imdad (Rameez Scripts)
+# WhatsApp: https://wa.me/923435347417 (For Custom Projects)
+# YouTube: https://www.youtube.com/@rameezimdad (Subscribe for more!)
+#
+# Job Autopilot profile. The agent answers application questions ONLY from this file.
+# Replace every <fill>. Use true / false for yes-no values. Check it with: node ja.mjs profile check
+
+identity:
+  first_name: <fill>
+  last_name: <fill>
+  email: <fill>
+  phone: <fill>                     # with country code, e.g. "+1 555 010 0000"
+  city: <fill>
+  country: <fill>                   # 2-letter code, e.g. PK
+  address:                          # only used when a form requires it
+  linkedin:
+  github:
+  portfolio:
+
+documents:
+  resume_path: <fill>               # absolute path to your resume PDF
+  master_resume_path:               # optional markdown master resume, see templates/master-resume.example.md
+  tailor_resume: false              # true = reorder your master resume per job (never adds facts)
+  cover_letter: auto                # auto = write one when the form has a field, none = never
+
+eligibility:
+  authorized_countries: [<fill>]    # where you can work without sponsorship, e.g. [PK, AE]
+  needs_visa_sponsorship: <fill>    # true / false, for countries outside the list above
+  willing_to_relocate: false
+  notice_period: 1 month
+  earliest_start:                   # YYYY-MM-DD, empty = after the notice period
+  background_check_ok: true
+  talent_pool_ok: false
+
+targets:
+  roles: [<fill>]                   # e.g. [Frontend Developer, React Developer]
+  seniority: [middle]               # intern, junior, middle, senior, lead, staff, principal
+  work_mode: [remote]               # remote, hybrid, onsite
+  where:
+    countries: []                   # e.g. [PK, AE]
+    regions: [global]               # global, eu, uk, mena, north_america, latam, apac, africa, cis
+    cities: []
+  skills:                           # skill: years
+    <fill>: 0
+  min_salary:                       # e.g. { amount: 2500, currency: USD, period: month }
+  exclude_companies: []
+
+experience:
+  years_total: 0
+  current_title:
+  current_company:
+  highlights:                       # 2 to 4 facts you can defend in an interview
+    -
+  education:                        # one line per degree, quoted, e.g. - "BS Computer Science, Demo University, 2021"
+    -
+  languages:                        # level = CEFR (A1 to C2) or native
+    - { name: English, level: C1 }
+
+answers:
+  salary_expectation:               # what goes in a salary box, e.g. "3000 USD per month, negotiable"
+  current_salary:                   # empty = leave that question blank when it is optional
+  why_looking:                      # one line
+  ai_assistance_disclosure: "Yes. I used an AI assistant to fill in this form. All information comes from me."
+  saved: []                         # answers you approved once, e.g. - { q: Are you OK with on-call?, a: Yes, one week per month }
+
+voluntary:
+  gender: Decline to self-identify
+  race_ethnicity: Decline to self-identify
+  veteran: Decline to self-identify
+  disability: Decline to self-identify
+
+preferences:
+  avoid: []                         # e.g. [staffing and outsourcing agencies]
+  notes: []                         # e.g. [product companies over agencies]
+
+inbox:
+  enabled: false                    # true = read-only email checks for codes and replies (needs an email MCP)
+
+saved_searches: []                  # for daily runs, e.g. - { name: react-remote, ask: remote React jobs in Europe }
+
+settings:
+  mode: review                      # review = you approve before submit, auto = submits on its own, dry-run = fill only
+  daily_cap: 15                     # applications per day, 1 to 50
+  per_company_30d: 2                # applications to one company in 30 days
+  posted_within_days: 14
+  min_fit: 60                       # 0 to 100, lower-scoring jobs are skipped
+  delay_seconds: 30                 # gap between two submits, 20 to 90
+  applier_model: sonnet             # model for the per-job browser agent (Claude Code)
+  paper: A4                         # A4 or Letter, for tailored resumes
+  trusted_hosts: []                 # extra hosts to treat as official, e.g. your own test server

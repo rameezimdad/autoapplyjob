@@ -1,0 +1,17 @@
+{
+  "name": "autoapplyjob",
+  "version": "0.3.0",
+  "private": true,
+  "type": "module",
+  "description": "Job Autopilot: AI auto job apply skill for Claude Code and Codex. freehire search, official company sites, Chromium.",
+  "author": "Mohammad Rameez Imdad (Rameez Scripts) <Contact@rameezscripts.com>",
+  "license": "MIT",
+  "scripts": {
+    "setup": "bash skills/job-autopilot/scripts/setup.sh --no-browser",
+    "test": "node --test tests/unit.test.mjs tests/browser.test.mjs",
+    "e2e": "bash tests/e2e/run.sh",
+    "demo-forms": "node tests/serve.mjs",
+    "demo-gif": "node tests/demo.mjs"
+  },
+  "engines": { "node": ">=18" }
+}

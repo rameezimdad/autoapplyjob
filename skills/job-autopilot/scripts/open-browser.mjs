@@ -11,7 +11,7 @@ import { homedir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-const APP = process.env.JOB_AUTOPILOT_HOME || join(homedir(), '.job-autopilot');
+const APP = join(homedir(), '.job-autopilot'); // install dir: browser profile + playwright
 const welcome = pathToFileURL(join(dirname(fileURLToPath(import.meta.url)), '..', 'assets', 'welcome.html')).href;
 const urls = process.argv.slice(2).length ? process.argv.slice(2) : [welcome];
 
@@ -27,7 +27,7 @@ try {
   for (const u of urls.slice(1)) await (await ctx.newPage()).goto(u);
 } catch (e) {
   console.error(e.message);
-  if (/ProcessSingleton|in use|lock/i.test(e.message)) console.error('The browser profile is already open. Close the other Chromium window first.');
+  if (/ProcessSingleton|in use|SingletonLock/i.test(e.message)) console.error('The browser profile is already open. Close the other Chromium window first.');
   else if (process.platform === 'linux') console.error(`Missing system libraries? Run: sudo "${join(APP, 'node_modules/.bin/playwright')}" install-deps chromium`);
   process.exit(1);
 }

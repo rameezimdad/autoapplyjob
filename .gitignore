@@ -12,3 +12,7 @@ profile.md
 applications.jsonl
 applications.csv
 *.pdf
+# test output
+tests/**/hits.jsonl
+*.webm
+profile.yaml
